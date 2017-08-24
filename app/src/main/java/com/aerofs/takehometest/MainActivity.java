@@ -12,6 +12,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    SearchView search = (SearchView) item.getActionView();
-    search.setLayoutParams(new ActionBar.LayoutParams(Gravity.RIGHT));
+
 }
