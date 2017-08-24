@@ -6,13 +6,23 @@
     android:layout_height="match_parent"
     tools:context="com.aerofs.takehometest.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="wrap_content" android:orientation="horizontal"
+        android:layout_width="fill_parent">
+
+    <EditText android:text="@+id/EditText01"
+        android:id="@+id/EditText01"
         android:layout_height="wrap_content"
-        android:text="Hello!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_weight="1"
+        android:layout_width="fill_parent"
+        android:hint="Enter GitHub username">
+    </EditText>
+    <Button
+        android:id="@+id/Search"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:text="Search">
+    </Button>
+</LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
