@@ -6,23 +6,32 @@
     android:layout_height="match_parent"
     tools:context="com.aerofs.takehometest.MainActivity">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_height="wrap_content" android:orientation="horizontal"
-        android:layout_width="fill_parent">
+    <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--android:layout_height="wrap_content" android:orientation="horizontal"-->
+        <!--android:layout_width="0dp"-->
+        <!--tools:layout_editor_absoluteY="0dp"-->
+        <!--tools:layout_editor_absoluteX="0dp">-->
 
-    <EditText android:text="@+id/EditText01"
-        android:id="@+id/EditText01"
+    <!--<EditText android:text="@+id/EditText01"-->
+        <!--android:id="@+id/EditText01"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:hint="Enter GitHub username">-->
+    <!--</EditText>-->
+    <!--<Button-->
+        <!--android:id="@+id/Search"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="38dp"-->
+        <!--android:text="Search">-->
+    <!--</Button>-->
+    <SearchView
+        android:layout_width="344dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_width="fill_parent"
-        android:hint="Enter GitHub username">
-    </EditText>
-    <Button
-        android:id="@+id/Search"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:text="Search">
-    </Button>
-</LinearLayout>
+        android:iconifiedByDefault="false"
+        android:queryHint="Search Username"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="0dp"></SearchView>
+
 
 </android.support.constraint.ConstraintLayout>
