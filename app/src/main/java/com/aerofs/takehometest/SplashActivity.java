@@ -19,6 +19,7 @@ import android.widget.TextView;
 public class SplashActivity extends AppCompatActivity {
     private TextView tv;
     private ImageView iv;
+    final int sleepTime = 4000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,7 @@ public class SplashActivity extends AppCompatActivity {
         Thread thread = new Thread(){
             public void run(){
                 try {
-                    sleep(3000); //sleep thread for 3 secs
+                    sleep(sleepTime); //sleep thread for specified number of seconds
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

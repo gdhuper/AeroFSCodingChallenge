@@ -34,6 +34,7 @@
     <!--</Button>-->
     <SearchView
         android:id="@+id/search_bar"
+        app:iconifiedByDefault="true"
         android:layout_width="344dp"
         android:layout_height="wrap_content"
         android:iconifiedByDefault="false"
