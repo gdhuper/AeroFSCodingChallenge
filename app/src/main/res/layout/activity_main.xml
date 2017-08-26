@@ -32,6 +32,7 @@
         <!--android:layout_height="38dp"-->
         <!--android:text="Search">-->
     <!--</Button>-->
+
     <SearchView
         android:id="@+id/search_bar"
         app:iconifiedByDefault="true"
@@ -42,7 +43,10 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="0dp"></SearchView>
 
-
+    <TextView
+        android:id="@+id/output"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 
 <!--</android.support.constraint.ConstraintLayout>-->

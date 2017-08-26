@@ -6,11 +6,11 @@ import android.os.AsyncTask;
  * Created by gurpreet on 8/24/17.
  */
 
-public class APIRequest_Background extends AsyncTask<String, Void, String> {
+public class APIRequestTask extends AsyncTask<String, Void, String> {
 
     private String url;
 
-    public APIRequest_Background(String url){
+    public APIRequestTask(String url){
         this.url = url;
     }
 
