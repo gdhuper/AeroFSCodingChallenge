@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.view.ViewStub;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,37 +22,53 @@ import com.android.volley.RequestQueue;
 
 
 public class MainActivity extends AppCompatActivity {
-
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    /*
+     * Helper method to add user bio layout to activity_main
+     */
+    public void injectUserBio(){
 
         LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = vi.inflate(R.layout.user_bio, null);
 
 //// fill in any details dynamically here
-//        TextView textView = (TextView) v.findViewById(R.id.a_text_view);
-//        textView.setText("your text");
+        TextView textView = (TextView) v.findViewById(R.id.name);
+        textView.setText("Gurpreet Singh");
+
 
 // insert into main view
         ViewGroup insertPoint = (ViewGroup) findViewById(R.id.user_bio_view);
         insertPoint.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
 
+//
+    }
+
+    public void addActionbar(){
         //adding icon to action bar
         ActionBar ab = getSupportActionBar();
         ab.setDisplayShowHomeEnabled(true);
         ab.setIcon(R.mipmap.github_logo);
         ab.setDisplayUseLogoEnabled(true);
         ab.setTitle(R.string.app_name);
+    }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        //Adding action bar in main layout
+        addActionbar();
+
+        injectUserBio();
 
         ArrayList<String> list = new ArrayList<>();
         list.add("San Francisco");
         list.add("London");
         list.add("Tokyo");
+        list.add("Mexico City");
+        list.add("Moscow");
+        list.add("Rio de Janeiro");
+        list.add("Paris");
         list.add("Mexico City");
         list.add("Moscow");
         list.add("Rio de Janeiro");

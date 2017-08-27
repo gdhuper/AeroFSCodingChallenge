@@ -15,7 +15,7 @@
 
         <SearchView
             android:id="@+id/search_bar"
-            android:layout_width="344dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:iconifiedByDefault="false"
             android:queryHint="Search Username"
@@ -29,10 +29,23 @@
     <FrameLayout
         android:id="@+id/user_bio_view"
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"></FrameLayout>
+
+
+        <!--<View-->
+            <!--android:id="@+id/user_bio_stub"-->
+            <!--android:inflatedId="@+id/panel_import"-->
+
+            <!--android:layout="@layout/user_bio"-->
+
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="top" />-->
 
     <ListView
         android:id="@+id/repoList"
+
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>
