@@ -7,19 +7,30 @@ import java.io.*;
 
 public class RepoListItem {
     private String repoName;
+
+    public String getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(String lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    private String lastUpdate;
     private int numStars;
     private int numForks;
     private int numWatchers;
-    private int numBranches;
+    private int numContributors;
     private String language;
 
 
-    public RepoListItem(String repoName, int numStars, int numForks, int numWatchers, int numBranches, String language){
+    public RepoListItem(String repoName, String lastUpdate, int numStars, int numForks, int numWatchers, int numContributors, String language){
         this.repoName = repoName;
+        this.lastUpdate = lastUpdate;
         this.numStars = numStars;
         this.numForks = numForks;
         this.numWatchers = numWatchers;
-        this.numBranches = numBranches;
+        this.numContributors = numContributors;
         this.language = language;
     }
 
@@ -55,12 +66,12 @@ public class RepoListItem {
         this.numWatchers = numWatchers;
     }
 
-    public int getNumBranches() {
-        return numBranches;
+    public int getnumContributors() {
+        return numContributors;
     }
 
-    public void setNumBranches(int numBranches) {
-        this.numBranches = numBranches;
+    public void setnumContributors(int numContributors) {
+        this.numContributors = numContributors;
     }
 
     public String getLanguage() {
