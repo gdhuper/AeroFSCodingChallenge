@@ -17,14 +17,17 @@ public class RepoListItem {
     }
 
     private String lastUpdate;
-    private int numStars;
-    private int numForks;
-    private int numWatchers;
-    private int numContributors;
+    private String numStars;
+    private String numForks;
+    private String numWatchers;
+    private String numContributors;
     private String language;
+    private String colorCode;
 
 
-    public RepoListItem(String repoName, String lastUpdate, int numStars, int numForks, int numWatchers, int numContributors, String language){
+
+
+    public RepoListItem(String repoName, String lastUpdate, String numStars, String numForks, String numWatchers, String numContributors, String language, String colorCode){
         this.repoName = repoName;
         this.lastUpdate = lastUpdate;
         this.numStars = numStars;
@@ -32,6 +35,8 @@ public class RepoListItem {
         this.numWatchers = numWatchers;
         this.numContributors = numContributors;
         this.language = language;
+        this.colorCode = colorCode;
+
     }
 
     public String getRepoName() {
@@ -42,35 +47,35 @@ public class RepoListItem {
         this.repoName = repoName;
     }
 
-    public int getNumStars() {
+    public String getNumStars() {
         return numStars;
     }
 
-    public void setNumStars(int numStars) {
+    public void setNumStars(String numStars) {
         this.numStars = numStars;
     }
 
-    public int getNumForks() {
+    public String getNumForks() {
         return numForks;
     }
 
-    public void setNumForks(int numForks) {
+    public void setNumForks(String numForks) {
         this.numForks = numForks;
     }
 
-    public int getNumWatchers() {
+    public String getNumWatchers() {
         return numWatchers;
     }
 
-    public void setNumWatchers(int numWatchers) {
+    public void setNumWatchers(String numWatchers) {
         this.numWatchers = numWatchers;
     }
 
-    public int getnumContributors() {
+    public String getNumContributors() {
         return numContributors;
     }
 
-    public void setnumContributors(int numContributors) {
+    public void setNumContributors(String numContributors) {
         this.numContributors = numContributors;
     }
 
@@ -80,5 +85,13 @@ public class RepoListItem {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public String getColorCode() {
+        return colorCode;
+    }
+
+    public void setColorCode(String colorCode) {
+        this.colorCode = colorCode;
     }
 }

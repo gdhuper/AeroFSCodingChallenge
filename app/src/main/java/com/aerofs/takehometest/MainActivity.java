@@ -18,6 +18,7 @@ import android.widget.TextView;
 import java.util.*;
 import java.io.*;
 
+
 import com.android.volley.RequestQueue;
 
 
@@ -42,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
 //
     }
 
+    /*
+     * Helper method to add action bar to top of main activity
+     */
     public void addActionbar(){
         //adding icon to action bar
         ActionBar ab = getSupportActionBar();
@@ -61,23 +65,37 @@ public class MainActivity extends AppCompatActivity {
 
         injectUserBio();
 
-        ArrayList<String> list = new ArrayList<>();
-        list.add("San Francisco");
-        list.add("London");
-        list.add("Tokyo");
-        list.add("Mexico City");
-        list.add("Moscow");
-        list.add("Rio de Janeiro");
-        list.add("Paris");
-        list.add("Mexico City");
-        list.add("Moscow");
-        list.add("Rio de Janeiro");
-        list.add("Paris");
+        ArrayList<RepoListItem> list = new ArrayList<>();
+        list.add(new RepoListItem("AeroFs", "2017-08-12", "2", "3", "3", "2", "Java", JsonUtility.getHexCode("Java")));
+        list.add(new RepoListItem("AeroFs", "2017-08-12", "2", "3", "3", "2", "Java", JsonUtility.getHexCode("Java")));
+        list.add(new RepoListItem("AeroFs", "2017-08-12", "2", "3", "3", "2", "Java", JsonUtility.getHexCode("Java")));
+
+        list.add(new RepoListItem("AeroFs", "2017-08-12", "2", "3", "3", "2", "Java", JsonUtility.getHexCode("Java"))); list.add(new RepoListItem("AeroFs", "2017-08-12", "2", "3", "3", "2", "Java", JsonUtility.getHexCode("Java")));
+
+        list.add(new RepoListItem("AeroFs", "2017-08-12", "2", "3", "3", "2", "Java", JsonUtility.getHexCode("Java"))); list.add(new RepoListItem("AeroFs", "2017-08-12", "2", "3", "3", "2", "Java", JsonUtility.getHexCode("Java")));
+
+        list.add(new RepoListItem("AeroFs", "2017-08-12", "2", "3", "3", "2", "Java", JsonUtility.getHexCode("Java"))); list.add(new RepoListItem("AeroFs", "2017-08-12", "2", "3", "3", "2", "Java", JsonUtility.getHexCode("Java")));
+
+        list.add(new RepoListItem("AeroFs", "2017-08-12", "2", "3", "3", "2", "Java", JsonUtility.getHexCode("Java"))); list.add(new RepoListItem("AeroFs", "2017-08-12", "2", "3", "3", "2", "Java", JsonUtility.getHexCode("Java")));
+
+        list.add(new RepoListItem("AeroFs", "2017-08-12", "2", "3", "3", "2", "Java", JsonUtility.getHexCode("Java"))); list.add(new RepoListItem("AeroFs", "2017-08-12", "2", "3", "3", "2", "Java", JsonUtility.getHexCode("Java")));
+
+        list.add(new RepoListItem("AeroFs", "2017-08-12", "2", "3", "3", "2", "Java", JsonUtility.getHexCode("Java"))); list.add(new RepoListItem("AeroFs", "2017-08-12", "2", "3", "3", "2", "Java", JsonUtility.getHexCode("Java")));
+
+        list.add(new RepoListItem("AeroFs", "2017-08-12", "2", "3", "3", "2", "Java", JsonUtility.getHexCode("Java"))); list.add(new RepoListItem("AeroFs", "2017-08-12", "2", "3", "3", "2", "Java", JsonUtility.getHexCode("Java")));
+
+        list.add(new RepoListItem("AeroFs", "2017-08-12", "2", "3", "3", "2", "Java", JsonUtility.getHexCode("Java"))); list.add(new RepoListItem("AeroFs", "2017-08-12", "2", "3", "3", "2", "Java", JsonUtility.getHexCode("Java")));
+
+
+
+
+
 
         ListView lv = (ListView) findViewById(R.id.repoList);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_list_item_1, list);
+        RepoListAdapter adapter = new RepoListAdapter(this, list);
+
+
         lv.setAdapter(adapter);
 
     }
