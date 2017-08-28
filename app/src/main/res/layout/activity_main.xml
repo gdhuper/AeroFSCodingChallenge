@@ -21,7 +21,26 @@
             android:queryHint="Search Username"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="0dp"></SearchView>
+        
+        <TextView
+            android:id="@+id/default_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:text="Welcome To Github Search!"
 
+            />
+
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"/>
         <!--<View-->
             <!--android:id="@+id/user_bio"-->
             <!--android:layout_width="match_parent"-->

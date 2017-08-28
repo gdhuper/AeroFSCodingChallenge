@@ -23,8 +23,7 @@ public class RepoListItem {
     private String numContributors;
     private String language;
     private String colorCode;
-
-
+   // private String repoUrl;
 
 
     public RepoListItem(String repoName, String lastUpdate, String numStars, String numForks, String numWatchers, String numContributors, String language, String colorCode){
@@ -36,8 +35,19 @@ public class RepoListItem {
         this.numContributors = numContributors;
         this.language = language;
         this.colorCode = colorCode;
+        //this.repoUrl = repoUrl;
 
     }
+
+
+//    public String getRepoUrl() {
+//        return repoUrl;
+//    }
+//
+//    public void setRepoUrl(String repoUrl) {
+//        this.repoUrl = repoUrl;
+//    }
+
 
     public String getRepoName() {
         return repoName;
