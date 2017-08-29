@@ -41,8 +41,6 @@ public class JsonUtility {
     private final static String REPOS_BASE_URL = "https://api.github.com/users/";
     private final static String REPOS_URL_POSTFIX = "/repos";
 
-    private final static String CONTRIBUTORS_BASE_URL = "https://api.github.com/repos/";
-    private final static String CONTRIBUTORS_POST_URL = "/contributors";
 
 
     private final static String USER_BIO_API = "https://api.github.com/users/";
@@ -97,11 +95,11 @@ public class JsonUtility {
 
             String userName = obj.getString("login");
 
-            String loc = obj.getString("location") == null ? "" : obj.getString("location");
+            String loc = obj.getString("location") == null || obj.getString("location") == "" ? " " : obj.getString("location");
 
-            String  email = obj.getString("email") == null ? "" : obj.getString("email");
+            String  email = obj.getString("email") != null? obj.getString("email") : " ";
 
-            String blogUrl = obj.getString("blog") == "" ? "" : obj.getString("blog");
+            String blogUrl = obj.getString("blog") == "" || obj.getString("blog") == null ? " " : obj.getString("blog");
             user = new UserBioActivity(avatar, name, userName, loc, email, blogUrl);
 
             }
@@ -224,6 +222,9 @@ public class JsonUtility {
                 JSONObject obj = jsonArr.getJSONObject(i);
                 JSONObject useBio = obj.getJSONObject("owner");
 
+                String contributors = obj.getString("contributors_url");
+               // String numContributors = getNumContributors(generateValidUrl(contributors));
+                String numContributors = "1";
                 String repoName = obj.getString("name");
 
 
@@ -247,9 +248,8 @@ public class JsonUtility {
 
                 String numStars = obj.getString("stargazers_count");
 
-                //  String colorCode  = colorObj.getString(lang);
 
-                RepoListItem item = new RepoListItem(repoName, lastUpdate, numStars, numForks, numWatcher, "", lang, "");
+                RepoListItem item = new RepoListItem(repoName, lastUpdate, numStars, numForks, numWatcher, numContributors, lang, lang);
                 list.add(item);
 
             }
@@ -263,9 +263,20 @@ public class JsonUtility {
     }
 
 
-    public static String getHexCode(String color){
-        return "#b07219";
-    }
+//    public static String getNumContributors(URL url) throws JSONException {
+//        int count = 0;
+//        String jsonResponse = null;
+//
+//        try {
+//            jsonResponse = callHttpApi(url);
+//        }catch (IOException e){
+//            Log.e("JsonUtility", "API request failed for contributors info");
+//        }
+//
+//        JSONArray jsonArr = new JSONArray(jsonResponse);
+//
+//        return jsonArr.length() + "";
+//    }
 
 
 }

@@ -23,6 +23,8 @@ import java.util.List;
 
 public class RepoListAdapter extends ArrayAdapter<RepoListItem> {
 
+
+
     /**
      * custom constructor for array adapter
      * @param context app context
@@ -73,9 +75,61 @@ public class RepoListAdapter extends ArrayAdapter<RepoListItem> {
         ImageView langColorView = (ImageView) listItemView.findViewById(R.id.lang_color);
 
         GradientDrawable colorCode = (GradientDrawable) langColorView.getBackground();
-        int color = R.color.java;
+        String colorHex = repo.getColorCode();
+
+        int color  = R.color.Java;
+
+        color = setColor(colorHex);
+
         colorCode.setColor(ContextCompat.getColor(getContext(), color));
 
+
+
         return listItemView;
+    }
+
+
+    public static int  setColor( String colorHex){
+        int color;
+        if(colorHex.equals("Java")){
+            color = R.color.Java;
+        }
+        else if(colorHex.equals("Python")){
+            color = R.color.Python;
+        }
+       else if(colorHex.equals("CSS")){
+            color = R.color.CSS;
+        }else if(colorHex.equals("C")){
+            color = R.color.C;
+        }else if(colorHex.equals("Swift")){
+            color = R.color.Swift;
+        }else if(colorHex.equals("HTML")){
+            color = R.color.HTML;
+        }else if(colorHex.equals("CoffeeScript")){
+            color = R.color.CoffeeScript;
+        }
+        else if(colorHex.equals("PHP")){
+            color = R.color.PHP;
+        }
+        else if(colorHex.equals("Go")){
+            color = R.color.Go;
+        }
+        else if(colorHex.equals("Ruby")){
+            color = R.color.Ruby;
+        }else if(colorHex.equals("Shell")){
+            color = R.color.Shell;
+        }
+        else if(colorHex.equals("Jupyter")){
+            color = R.color.Jupyter;
+        }
+        else if(colorHex.equals("TypeScript")){
+            color = R.color.TypeScript;
+        }
+        else{
+            color = R.color.Jupyter;
+        }
+
+        return color;
+
     }
 }

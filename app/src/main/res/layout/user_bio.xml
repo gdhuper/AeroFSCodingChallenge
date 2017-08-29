@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Fredric Murry"
+                android:text=""
                 android:textStyle="bold" />
 
             <TextView
@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:text="FMurry" />
+                android:text="" />
 
             <TextView
                 android:id="@+id/location"
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.9"
                 android:autoLink="all"
-                android:text="San Jose" />
+                android:text="" />
 
             <TextView
                 android:id="@+id/email"
@@ -57,7 +57,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:scrollHorizontally="true"
-                android:text="stuff@gmail.com" />
+                android:text="" />
 
             <TextView
                 android:id="@+id/blog"
@@ -68,7 +68,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:scrollHorizontally="true"
-                android:text="Fmurry.com" />
+                android:text="" />
 
 
         </LinearLayout>
