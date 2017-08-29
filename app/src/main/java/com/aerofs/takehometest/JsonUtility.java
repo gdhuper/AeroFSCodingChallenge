@@ -41,7 +41,13 @@ public class JsonUtility {
     private final static String REPOS_BASE_URL = "https://api.github.com/users/";
     private final static String REPOS_URL_POSTFIX = "/repos";
 
-    private static String fullRepoUrl;
+    private final static String CONTRIBUTORS_BASE_URL = "https://api.github.com/repos/";
+    private final static String CONTRIBUTORS_POST_URL = "/contributors";
+
+
+    private final static String USER_BIO_API = "https://api.github.com/users/";
+
+
 
 
     //private static ArrayList<RepoListItem> repoList = null;
@@ -57,12 +63,64 @@ public class JsonUtility {
     }
 
 
+    public static UserBioActivity getUserBio(String userName){
+        UserBioActivity user = null;
+        String completeUrl = USER_BIO_API + userName;
+
+        URL url = generateValidUrl(completeUrl);
+
+        String jsonResponse = null;
+
+        try {
+            jsonResponse = callHttpApi(url);
+        }catch (IOException e){
+            Log.e("JsonUtility", "API request failed for user info");
+        }
+
+
+        return parseUserBioResponse(jsonResponse);
+    }
+
+    public static UserBioActivity parseUserBioResponse(String jsonResponse){
+
+        if(TextUtils.isEmpty(jsonResponse)) return null;
+
+        UserBioActivity user = null;
+
+
+        try {
+            JSONObject obj = new JSONObject(jsonResponse);
+
+            String avatar = obj.getString("avatar_url");
+            String name = obj.getString("name");
+            String url = obj.getString("url");
+
+            String userName = obj.getString("login");
+
+            String loc = obj.getString("location") == null ? "" : obj.getString("location");
+
+            String  email = obj.getString("email") == null ? "" : obj.getString("email");
+
+            String blogUrl = obj.getString("blog") == "" ? "" : obj.getString("blog");
+            user = new UserBioActivity(avatar, name, userName, loc, email, blogUrl);
+
+            }
+
+        catch (JSONException e) {
+            Log.e("JsonUtility", "User Bio API Response could not be parsed", e);
+        }
+
+        return user;
+
+    }
+
+
 
 
 
     public static ArrayList<RepoListItem> getRepos(String userName){
 
-        fullRepoUrl =  REPOS_BASE_URL + userName + REPOS_URL_POSTFIX;
+        String fullRepoUrl =  REPOS_BASE_URL + userName + REPOS_URL_POSTFIX;
         System.out.println("full url: "+ fullRepoUrl);
 
         //validating API Url
@@ -71,10 +129,9 @@ public class JsonUtility {
         String jsonResponse = null;
 
         try {
-            System.out.println("making http Request userName: " + userName);
             jsonResponse = callHttpApi(url);
         }catch (IOException e){
-            Log.e("JsonUtilit", "API request Failed");
+            Log.e("JsonUtility", "API request Failed");
         }
 
         ArrayList<RepoListItem> repoList = parseJsonResponse(jsonResponse);
@@ -114,7 +171,7 @@ public class JsonUtility {
                 inStream = connection.getInputStream();
                 jsonResponse = processInputStream(inStream);
             }else{
-                Log.e("JsonUtility", connection.getResponseCode() + "");
+                Log.e("JsonUtility", "Error code " + connection.getResponseCode() + " recieved when calling API");
             }
         }catch (IOException e){
             Log.e("JSonUTility", "Error Calling API");
@@ -169,6 +226,7 @@ public class JsonUtility {
 
                 String repoName = obj.getString("name");
 
+
                 String userName = useBio.getString("login");
 
 
@@ -178,7 +236,8 @@ public class JsonUtility {
 
                 String htmlUrl = useBio.getString("html_url");
 
-                String lastUpdate = obj.getString("updated_at");
+                String[] lastUpdated = obj.getString("updated_at").split("T");
+                String lastUpdate = "Last Updated: " + lastUpdated[0];
 
                 String numWatcher = obj.getString("watchers_count");
 
@@ -208,11 +267,5 @@ public class JsonUtility {
         return "#b07219";
     }
 
-    public static UserBioActivity getUserBio(String userName) {
-        UserBioActivity uBio = null;
 
-
-
-        return uBio;
-    }
 }

@@ -6,6 +6,8 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -25,6 +27,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.*;
 import java.io.*;
 import android.app.SearchManager;
@@ -76,9 +81,10 @@ public class MainActivity extends AppCompatActivity {
 
         defaultTextView = (TextView) findViewById(R.id.default_view);
 
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                .permitAll().build();
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
         //searchview query listener for reading user input
         searchView = (SearchView) findViewById(R.id.search_bar);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -93,19 +99,24 @@ public class MainActivity extends AppCompatActivity {
                   repoList =  JsonUtility.getRepos(userName);
 
                     if(repoList != null) {
-                        defaultTextView.setVisibility(View.INVISIBLE);
+                        defaultTextView.setVisibility(View.GONE);
+                        //defaultTextView.setVisibility(View.INVISIBLE);
                         adapter = new RepoListAdapter(context, repoList);
                         repoListView.setAdapter(adapter);
 
 
 
-                       // UserBioActivity userBio = JsonUtility.getUserBio(userName);
-
-                       // injectUserBio(userBio);
+                        UserBioActivity userBio = JsonUtility.getUserBio(userName);
+                        System.out.println("bio: "+ userBio.getAvatar_url() +" " + userBio.getName());
+                        try {
+                            injectUserBio(userBio);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                     else{
                         defaultTextView.setVisibility(View.VISIBLE);
-                        repoListView.setVisibility(View.INVISIBLE);
+                       // repoListView.setVisibility(View.INVISIBLE);
                         defaultTextView.setText("User " + userName +" does not exist!");
                         System.out.println(" User name does not exist!");
                     }
@@ -133,30 +144,33 @@ public class MainActivity extends AppCompatActivity {
     /*
      * Helper method to add user bio layout to activity_main
      */
-    public void injectUserBio(UserBioActivity uBio){
+    public void injectUserBio(UserBioActivity uBio) throws MalformedURLException, IOException{
 
         LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = vi.inflate(R.layout.user_bio, null);
 
-        Uri avatar_uri = Uri.parse(uBio.getAvatar_url());
         ImageView avatar = (ImageView) v.findViewById(R.id.avatar);
-        avatar.setImageURI(avatar_uri);
+
+        URL url = new URL(uBio.getAvatar_url());
+        Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+        avatar.setImageBitmap(bmp);
+
 
 
         TextView nameView = (TextView) v.findViewById(R.id.name);
         nameView.setText(uBio.getName());
 
-        TextView userNameView = (TextView) v.findViewById(R.id.name);
+        TextView userNameView = (TextView) v.findViewById(R.id.username);
         userNameView.setText(uBio.getUserName());
 
-        TextView locationView = (TextView) v.findViewById(R.id.name);
+        TextView locationView = (TextView) v.findViewById(R.id.location);
         locationView.setText(uBio.getLocation());
 
 
-        TextView emailView = (TextView) v.findViewById(R.id.name);
+        TextView emailView = (TextView) v.findViewById(R.id.email);
         emailView.setText(uBio.getEmail());
 
-        TextView blogUrlView = (TextView) v.findViewById(R.id.name);
+        TextView blogUrlView = (TextView) v.findViewById(R.id.blog);
         blogUrlView.setText(uBio.getBlogUrl());
 
 
