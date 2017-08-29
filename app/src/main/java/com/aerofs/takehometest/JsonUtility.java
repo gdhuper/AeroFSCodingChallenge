@@ -3,24 +3,11 @@ package com.aerofs.takehometest;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.text.TextUtils;
-import android.util.StringBuilderPrinter;
-import android.widget.ArrayAdapter;
 
 import org.json.*;
-import org.w3c.dom.Text;
 
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
-
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -224,8 +211,7 @@ public class JsonUtility {
                 JSONObject obj = jsonArr.getJSONObject(i);
                 JSONObject useBio = obj.getJSONObject("owner");
 
-                String contributors = obj.getString("contributors_url");
-               // String numContributors = getNumContributors(generateValidUrl(contributors));
+               // String contributors = obj.getString("contributors_url");
                 String numContributors = "1";
                 String repoName = obj.getString("name");
 
@@ -265,20 +251,6 @@ public class JsonUtility {
     }
 
 
-//    public static String getNumContributors(URL url) throws JSONException {
-//        int count = 0;
-//        String jsonResponse = null;
-//
-//        try {
-//            jsonResponse = callHttpApi(url);
-//        }catch (IOException e){
-//            Log.e("JsonUtility", "API request failed for contributors info");
-//        }
-//
-//        JSONArray jsonArr = new JSONArray(jsonResponse);
-//
-//        return jsonArr.length() + "";
-//    }
 
 
 }
