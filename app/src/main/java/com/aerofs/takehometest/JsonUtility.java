@@ -81,7 +81,7 @@ public class JsonUtility {
 
     public static UserBioActivity parseUserBioResponse(String jsonResponse){
 
-        if(TextUtils.isEmpty(jsonResponse)) return null;
+      //  if(TextUtils.isEmpty(jsonResponse)) return null;
 
         UserBioActivity user = null;
 
@@ -263,20 +263,7 @@ public class JsonUtility {
     }
 
 
-//    public static String getNumContributors(URL url) throws JSONException {
-//        int count = 0;
-//        String jsonResponse = null;
 //
-//        try {
-//            jsonResponse = callHttpApi(url);
-//        }catch (IOException e){
-//            Log.e("JsonUtility", "API request failed for contributors info");
-//        }
-//
-//        JSONArray jsonArr = new JSONArray(jsonResponse);
-//
-//        return jsonArr.length() + "";
-//    }
 
 
 }
