@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                         insertPoint.removeAllViewsInLayout();
                         defaultTextView.setVisibility(View.INVISIBLE);
                         defaultTextView.setVisibility(View.GONE);
+                        repoListView.setVisibility(View.VISIBLE);
 
 
                         adapter = new RepoListAdapter(context, repoList);

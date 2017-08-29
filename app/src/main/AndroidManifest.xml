@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aerofs.takehometest">
     <uses-permission android:name="android.permission.INTERNET" />
+    <!--Adding permission to record audio to avoid app from crashing-->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
 
     <application
         android:allowBackup="true"

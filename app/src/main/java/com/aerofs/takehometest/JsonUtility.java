@@ -68,7 +68,7 @@ public class JsonUtility {
 
     public static UserBioActivity parseUserBioResponse(String jsonResponse){
 
-        if(TextUtils.isEmpty(jsonResponse)) return null;
+      //  if(TextUtils.isEmpty(jsonResponse)) return null;
 
         UserBioActivity user = null;
 
