@@ -13,15 +13,6 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -33,11 +24,13 @@ import retrofit2.http.POST;
 import retrofit2.http.Url;
 
 /**
- * Created by gurpreet on 8/27/17.
+ * Created by gurpreet on 8/28/17.
  */
 
 public class JsonUtility {
 
+
+    //BASE URLS for APIs
     private final static String REPOS_BASE_URL = "https://api.github.com/users/";
     private final static String REPOS_URL_POSTFIX = "/repos";
 
@@ -48,23 +41,23 @@ public class JsonUtility {
 
 
 
-    //private static ArrayList<RepoListItem> repoList = null;
-
-    private  static final String colorCodes = "";
-
-
     /**
-     * Private constructor to prevent from instantiating this utility class
+     * Private constructor to prevent from instantiating this utility class since this class only holds utility methods and variables
      */
     private JsonUtility(){
 
     }
 
-
+    /**
+     * Method to make API call for user bio
+     * @param userName username to get bio for
+     * @return UserBioActivity object with all the user information
+     */
     public static UserBioActivity getUserBio(String userName){
         UserBioActivity user = null;
         String completeUrl = USER_BIO_API + userName;
 
+        //validate url
         URL url = generateValidUrl(completeUrl);
 
         String jsonResponse = null;
@@ -75,22 +68,26 @@ public class JsonUtility {
             Log.e("JsonUtility", "API request failed for user info");
         }
 
-
         return parseUserBioResponse(jsonResponse);
     }
 
+
+    /**
+     * Helper method to parse Json response for user bio API
+     * @param jsonResponse
+     * @return UserbioActivity object with all the information
+     */
     public static UserBioActivity parseUserBioResponse(String jsonResponse){
 
-      //  if(TextUtils.isEmpty(jsonResponse)) return null;
+        if(TextUtils.isEmpty(jsonResponse)) return null;
 
         UserBioActivity user = null;
-
 
         try {
             JSONObject obj = new JSONObject(jsonResponse);
 
             String avatar = obj.getString("avatar_url");
-            String name = obj.getString("name");
+            String name = obj.getString("name") == null ? "" : obj.getString("name");
             String url = obj.getString("url");
 
             String userName = obj.getString("login");
@@ -100,7 +97,7 @@ public class JsonUtility {
             String  email = obj.getString("email") != null? obj.getString("email") : " ";
 
             String blogUrl = obj.getString("blog") == "" || obj.getString("blog") == null ? " " : obj.getString("blog");
-            user = new UserBioActivity(avatar, name, userName, loc, email, blogUrl);
+            user = new UserBioActivity(avatar, name, userName, loc, email, blogUrl, url);
 
             }
 
@@ -113,9 +110,11 @@ public class JsonUtility {
     }
 
 
-
-
-
+    /**
+     * Method to get all public repositories for a user
+     * @param userName
+     * @return
+     */
     public static ArrayList<RepoListItem> getRepos(String userName){
 
         String fullRepoUrl =  REPOS_BASE_URL + userName + REPOS_URL_POSTFIX;
@@ -127,17 +126,21 @@ public class JsonUtility {
         String jsonResponse = null;
 
         try {
-            jsonResponse = callHttpApi(url);
+            jsonResponse = callHttpApi(url); //making GET request for the API
         }catch (IOException e){
             Log.e("JsonUtility", "API request Failed");
         }
 
-        ArrayList<RepoListItem> repoList = parseJsonResponse(jsonResponse);
+        ArrayList<RepoListItem> repoList = parseJsonResponse(jsonResponse); //parse response from API into a list
 
         return repoList;
     }
 
-
+    /**
+     * Helper method to validate a url
+     * @param stringUrl url to be validated
+     * @return validated url
+     */
     public  static  URL generateValidUrl(String stringUrl){
         URL url = null;
         try {
@@ -149,6 +152,12 @@ public class JsonUtility {
     }
 
 
+    /**
+     * HTTP client to make GET request to API
+     * @param url API url
+     * @return Response from API call
+     * @throws IOException
+     */
     public static String callHttpApi(URL url) throws  IOException{
         String jsonResponse = "";
 
@@ -165,7 +174,7 @@ public class JsonUtility {
             connection.setRequestMethod("GET");
             connection.connect();
 
-            if(connection.getResponseCode() == 200){
+            if(connection.getResponseCode() == 200){ //on success
                 inStream = connection.getInputStream();
                 jsonResponse = processInputStream(inStream);
             }else{
@@ -176,10 +185,10 @@ public class JsonUtility {
         }finally {
             if(connection != null)
             {
-                connection.disconnect();
+                connection.disconnect(); //closing connection
             }
             if(inStream != null){
-                inStream.close();
+                inStream.close(); //closing inputStream
             }
         }
 
@@ -207,7 +216,11 @@ public class JsonUtility {
         return sb.toString();
     }
 
-
+    /**
+     * Helper method to parse JSON response from get repositories API
+     * @param jsonResponse
+     * @return list of RepolistItem objects
+     */
     public static ArrayList<RepoListItem> parseJsonResponse(String jsonResponse){
 
         if(TextUtils.isEmpty(jsonResponse)) return null;
@@ -223,19 +236,9 @@ public class JsonUtility {
                 JSONObject useBio = obj.getJSONObject("owner");
 
                 String contributors = obj.getString("contributors_url");
-               // String numContributors = getNumContributors(generateValidUrl(contributors));
                 String numContributors = "1";
                 String repoName = obj.getString("name");
 
-
-                String userName = useBio.getString("login");
-
-
-
-                String avatarUrl = useBio.getString("avatar_url");
-
-
-                String htmlUrl = useBio.getString("html_url");
 
                 String[] lastUpdated = obj.getString("updated_at").split("T");
                 String lastUpdate = "Last Updated: " + lastUpdated[0];
@@ -263,7 +266,6 @@ public class JsonUtility {
     }
 
 
-//
 
 
 }

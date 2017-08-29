@@ -2,7 +2,7 @@ package com.aerofs.takehometest;
 import java.util.*;
 import java.io.*;
 /**
- * Created by gurpreet on 8/26/17.
+ * Created by gurpreet on 8/28/17.
  */
 
 public class UserBioActivity {
@@ -12,16 +12,28 @@ public class UserBioActivity {
     private String location;
     private String email;
     private String blogUrl;
+    private String url;
 
-    public UserBioActivity(String avatar_url, String name, String userName, String location, String email, String blogUrl){
+    public UserBioActivity(String avatar_url, String name, String userName, String location, String email, String blogUrl, String url){
         this.avatar_url = avatar_url;
         this.name = name;
         this.userName = userName;
         this.location = location;
         this.email = email;
         this.blogUrl = blogUrl;
+        this.url = url;
 
 
+    }
+
+    //Getters and Setters//
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getAvatar_url() {

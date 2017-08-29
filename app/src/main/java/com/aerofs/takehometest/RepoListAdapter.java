@@ -18,7 +18,7 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * Created by gurpreet on 8/26/17.
+ * Created by gurpreet on 8/28/17.
  */
 
 public class RepoListAdapter extends ArrayAdapter<RepoListItem> {
@@ -77,6 +77,7 @@ public class RepoListAdapter extends ArrayAdapter<RepoListItem> {
         GradientDrawable colorCode = (GradientDrawable) langColorView.getBackground();
         String colorHex = repo.getColorCode();
 
+        //default color code
         int color  = R.color.Java;
 
         color = setColor(colorHex);
@@ -88,7 +89,11 @@ public class RepoListAdapter extends ArrayAdapter<RepoListItem> {
         return listItemView;
     }
 
-
+    /**
+     * Helper method to get color index based on programming language
+     * @param colorHex
+     * @return
+     */
     public static int  setColor( String colorHex){
         int color;
         if(colorHex.equals("Java")){

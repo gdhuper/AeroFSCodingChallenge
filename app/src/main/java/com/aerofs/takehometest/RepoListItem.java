@@ -2,7 +2,7 @@ package com.aerofs.takehometest;
 import java.util.*;
 import java.io.*;
 /**
- * Created by gurpreet on 8/26/17.
+ * Created by gurpreet on 8/28/17.
  */
 
 public class RepoListItem {
@@ -39,14 +39,6 @@ public class RepoListItem {
 
     }
 
-
-//    public String getRepoUrl() {
-//        return repoUrl;
-//    }
-//
-//    public void setRepoUrl(String repoUrl) {
-//        this.repoUrl = repoUrl;
-//    }
 
 
     public String getRepoName() {

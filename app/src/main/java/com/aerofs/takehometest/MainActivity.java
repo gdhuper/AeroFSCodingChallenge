@@ -24,6 +24,7 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -38,10 +39,6 @@ import android.widget.SearchView.OnQueryTextListener;
 import android.widget.Toast;
 
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 
 import org.json.JSONArray;
 
@@ -77,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         //Adding action bar in main layout
         addActionbar();
 
+        // list view object to display repositories list
         final ListView repoListView = (ListView) findViewById(R.id.repoList);
 
         defaultTextView = (TextView) findViewById(R.id.default_view);
@@ -99,18 +97,22 @@ public class MainActivity extends AppCompatActivity {
                   repoList =  JsonUtility.getRepos(userName);
 
                     if(repoList != null) {
-
+                        //clear old user bio layout if it exists
                         ViewGroup insertPoint = (ViewGroup) findViewById(R.id.user_bio_view);
                         insertPoint.removeAllViewsInLayout();
+                        //setting default textview invisible
                         defaultTextView.setVisibility(View.INVISIBLE);
                         defaultTextView.setVisibility(View.GONE);
                         repoListView.setVisibility(View.VISIBLE);
-
+                        //setting list of repositories
                         adapter = new RepoListAdapter(context, repoList);
                         repoListView.setAdapter(adapter);
+                        //hide keyboard on result
+                        searchView.clearFocus();
 
+                        //gets user bio information
+                        final UserBioActivity userBio = JsonUtility.getUserBio(userName);
 
-                        UserBioActivity userBio = JsonUtility.getUserBio(userName);
                         System.out.println("bio: "+ userBio.getAvatar_url() +" " + userBio.getName());
                         try {
                             injectUserBio(userBio);
@@ -119,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                     else{
+                        // clear old user bio layout in case of error
                         ViewGroup insertPoint = (ViewGroup) findViewById(R.id.user_bio_view);
                         insertPoint.removeAllViewsInLayout();
                         defaultTextView.setVisibility(View.VISIBLE);
@@ -146,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
     /*
      * Helper method to add user bio layout to activity_main
      */
-    public void injectUserBio(UserBioActivity uBio) throws MalformedURLException, IOException{
+    public void injectUserBio(final UserBioActivity uBio) throws MalformedURLException, IOException{
 
         LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View  v = vi.inflate(R.layout.user_bio, null);
@@ -169,15 +172,12 @@ public class MainActivity extends AppCompatActivity {
         locationView.setText(uBio.getLocation());
 
 
-//        TextView emailView = (TextView) v.findViewById(R.id.email);
-//        emailView.setText(uBio.getEmail());
-
         TextView blogUrlView = (TextView) v.findViewById(R.id.blog);
         blogUrlView.setText(uBio.getBlogUrl());
 
 
         // insert into main view
-       ViewGroup insertPoint = (ViewGroup) findViewById(R.id.user_bio_view);
+        ViewGroup insertPoint = (ViewGroup) findViewById(R.id.user_bio_view);
 
         insertPoint.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
 

@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * Created by gurpreet on 8/25/17.
+ * Created by gurpreet on 8/28/17.
  */
 
 public class SplashActivity extends AppCompatActivity {
