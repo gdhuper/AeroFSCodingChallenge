@@ -48,6 +48,9 @@ public class RepoListAdapter extends ArrayAdapter<RepoListItem> {
         //get new repo item from the list
         RepoListItem repo = getItem(position);
 
+        TextView repoName = (TextView) listItemView.findViewById(R.id.repo_name);
+        repoName.setText(repo.getRepoName());
+
         //setting list item attributes for current list item
         TextView lastUpdateView = (TextView) listItemView.findViewById(R.id.last_updated);
         lastUpdateView.setText(repo.getLastUpdate());
@@ -72,7 +75,6 @@ public class RepoListAdapter extends ArrayAdapter<RepoListItem> {
         GradientDrawable colorCode = (GradientDrawable) langColorView.getBackground();
         int color = R.color.java;
         colorCode.setColor(ContextCompat.getColor(getContext(), color));
-
 
         return listItemView;
     }

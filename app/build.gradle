@@ -29,6 +29,6 @@ dependencies {
 
     // dependencies
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.mcxiaoke.volley:library:1.0.19'
+    compile 'com.mcxiaoke.volley:library:1.0.0'
     testCompile 'junit:junit:4.12'
 }
