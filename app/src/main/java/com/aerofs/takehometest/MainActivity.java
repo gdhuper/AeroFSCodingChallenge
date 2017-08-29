@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
         final ListView repoListView = (ListView) findViewById(R.id.repoList);
 
-        defaultTextView = (TextView) findViewById(R.id.default_view);
+        //defaultTextView = (TextView) findViewById(R.id.default_view);
 
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                   repoList =  JsonUtility.getRepos(userName);
 
                     if(repoList != null) {
-                        defaultTextView.setVisibility(View.GONE);
+                       // defaultTextView.setVisibility(View.GONE);
                         //defaultTextView.setVisibility(View.INVISIBLE);
                         adapter = new RepoListAdapter(context, repoList);
                         repoListView.setAdapter(adapter);
@@ -115,9 +115,9 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                     else{
-                        defaultTextView.setVisibility(View.VISIBLE);
+                      //  defaultTextView.setVisibility(View.VISIBLE);
                        // repoListView.setVisibility(View.INVISIBLE);
-                        defaultTextView.setText("User " + userName +" does not exist!");
+                      //  defaultTextView.setText("User " + userName +" does not exist!");
                         System.out.println(" User name does not exist!");
                     }
 
@@ -131,10 +131,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-        //display Bio data for username
-       // injectUserBio();
 
     }
 

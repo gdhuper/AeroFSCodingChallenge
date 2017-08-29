@@ -152,6 +152,7 @@ public class JsonUtility {
 
 
     public static String callHttpApi(URL url) throws  IOException{
+
         String jsonResponse = "";
 
         if(url == null){
@@ -161,6 +162,7 @@ public class JsonUtility {
         InputStream inStream = null;
 
         try {
+            Log.i("JsonUtility", "Establishing connection for "+ url);
             connection = (HttpURLConnection) url.openConnection();
             connection.setReadTimeout(10000 );
             connection.setConnectTimeout(14000);
