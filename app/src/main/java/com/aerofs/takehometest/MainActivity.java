@@ -99,11 +99,16 @@ public class MainActivity extends AppCompatActivity {
                   repoList =  JsonUtility.getRepos(userName);
 
                     if(repoList != null) {
-                       // defaultTextView.setVisibility(View.GONE);
-                        //defaultTextView.setVisibility(View.INVISIBLE);
+
+
+                        ViewGroup insertPoint = (ViewGroup) findViewById(R.id.user_bio_view);
+                        insertPoint.removeAllViewsInLayout();
+                        defaultTextView.setVisibility(View.INVISIBLE);
+                        defaultTextView.setVisibility(View.GONE);
+
+
                         adapter = new RepoListAdapter(context, repoList);
                         repoListView.setAdapter(adapter);
-
 
 
                         UserBioActivity userBio = JsonUtility.getUserBio(userName);
@@ -115,9 +120,13 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                     else{
-                      //  defaultTextView.setVisibility(View.VISIBLE);
-                       // repoListView.setVisibility(View.INVISIBLE);
-                      //  defaultTextView.setText("User " + userName +" does not exist!");
+
+                        ViewGroup insertPoint = (ViewGroup) findViewById(R.id.user_bio_view);
+                        insertPoint.removeAllViewsInLayout();
+                        defaultTextView.setVisibility(View.VISIBLE);
+                        repoListView.setVisibility(View.INVISIBLE);
+                        defaultTextView.setText("User " + userName +" does not exist!");
+
                         System.out.println(" User name does not exist!");
                     }
 
@@ -143,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
     public void injectUserBio(UserBioActivity uBio) throws MalformedURLException, IOException{
 
         LayoutInflater vi = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = vi.inflate(R.layout.user_bio, null);
+        View  v = vi.inflate(R.layout.user_bio, null);
 
         ImageView avatar = (ImageView) v.findViewById(R.id.avatar);
 
@@ -163,19 +172,22 @@ public class MainActivity extends AppCompatActivity {
         locationView.setText(uBio.getLocation());
 
 
-        TextView emailView = (TextView) v.findViewById(R.id.email);
-        emailView.setText(uBio.getEmail());
+//        TextView emailView = (TextView) v.findViewById(R.id.email);
+//        emailView.setText(uBio.getEmail());
 
         TextView blogUrlView = (TextView) v.findViewById(R.id.blog);
         blogUrlView.setText(uBio.getBlogUrl());
 
 
         // insert into main view
-        ViewGroup insertPoint = (ViewGroup) findViewById(R.id.user_bio_view);
+       ViewGroup insertPoint = (ViewGroup) findViewById(R.id.user_bio_view);
+
         insertPoint.addView(v, 0, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
 
 
     }
+
+
 
     /*
      * Helper method to add action bar to top of main activity
